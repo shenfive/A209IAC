@@ -11,9 +11,24 @@ class ViewController: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        // Do any additional setup after loading the view.
+        showIndicator()
     }
+    
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
+        
+        DispatchQueue.main.asyncAfter(deadline: .now() + 5 , execute: DispatchWorkItem(block: {
+            self.removeIndicator()
+        }))
+        
+        
+        
+    }
+    
 
-
+    @IBAction func doSomeThing(_ sender: Any) {
+        print("a")
+    }
+    
 }
 
