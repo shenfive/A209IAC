@@ -11,10 +11,26 @@ import UIKit
 extension UIViewController{
     func showIndicator(){
         let ind = UIActivityIndicatorView()
-        ind.frame = self.view.bounds
+    
+        ind.frame = CGRect(x: 0, y: 0, width: 200, height: 200)
+        ind.center = self.view.center
+
         ind.startAnimating()
         ind.restorationIdentifier = "myIndicatorView"
-        ind.backgroundColor = UIColor(red: 0, green: 0, blue: 0, alpha: 0.4)
+        
+        var counter = 1.0
+        let timer = Timer.scheduledTimer(withTimeInterval: 1/60, repeats: true) { timer in
+            ind.backgroundColor = UIColor(red: 0, green: 0, blue: 0, alpha: 0.2 + (( 0.4 / 60 ) * counter) )
+            counter += 1
+            if counter > 60{
+                counter = 1.0
+            }
+        }
+        timer.fire()
+        
+        
+//        ind.backgroundColor = UIColor(red: 0, green: 0, blue: 0, alpha: 0.4)
+        
         self.view.addSubview(ind)
     }
     
