@@ -17,16 +17,31 @@ extension UIViewController{
 
         ind.startAnimating()
         ind.restorationIdentifier = "myIndicatorView"
-        
-        var counter = 1.0
-        let timer = Timer.scheduledTimer(withTimeInterval: 1/60, repeats: true) { timer in
-            ind.backgroundColor = UIColor(red: 0, green: 0, blue: 0, alpha: 0.2 + (( 0.4 / 60 ) * counter) )
-            counter += 1
-            if counter > 60{
-                counter = 1.0
-            }
+        func startMyAni(){
+            ind.backgroundColor = UIColor(red: 0, green: 0, blue: 0, alpha: 0.2)
+            UIViewPropertyAnimator.runningPropertyAnimator(withDuration: 1, delay: 0, animations:{
+                ind.backgroundColor = UIColor(red: 0, green: 0, blue: 0, alpha: 0.6)
+            }, completion: {_ in
+                UIViewPropertyAnimator.runningPropertyAnimator(withDuration: 1, delay: 0, animations: {
+                    ind.backgroundColor = UIColor(red: 0, green: 0, blue: 0, alpha: 0.2)
+                },completion: {_ in
+                    startMyAni()
+                })
+            })
         }
-        timer.fire()
+        
+        startMyAni()
+        
+        
+        
+//        var counter = 1.0
+//        Timer.scheduledTimer(withTimeInterval: 1/60, repeats: true) { timer in
+//            ind.backgroundColor = UIColor(red: 0, green: 0, blue: 0, alpha: 0.2 + (( 0.4 / 60 ) * counter) )
+//            counter += 1
+//            if counter > 60{
+//                counter = 1.0
+//            }
+//        }.fire()
         
         
 //        ind.backgroundColor = UIColor(red: 0, green: 0, blue: 0, alpha: 0.4)

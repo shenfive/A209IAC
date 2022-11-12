@@ -16,7 +16,7 @@ class ViewController: UIViewController {
     
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
-        DispatchQueue.main.asyncAfter(deadline: .now() + 5 , execute:  {
+        DispatchQueue.main.asyncAfter(deadline: .now() + 10 , execute:  {
             self.removeIndicator()
         })
     }
